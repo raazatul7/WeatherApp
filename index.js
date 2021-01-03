@@ -2,8 +2,22 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
-import App from './App';
+import React, {Component} from 'react';
+import {AppRegistry, LogBox} from 'react-native';
+import App from './src';
 import {name as appName} from './app.json';
+import {Provider} from 'react-redux';
+import store from './src/redux/store/index';
 
-AppRegistry.registerComponent(appName, () => App);
+LogBox.ignoreAllLogs(true);
+class Root extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
+  }
+}
+
+AppRegistry.registerComponent(appName, () => Root);
